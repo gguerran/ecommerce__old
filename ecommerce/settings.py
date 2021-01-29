@@ -25,6 +25,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'drf_yasg',
     'oauth2_provider',
+    'django_filters',
 
     # Apps locais
     'ecommerce.accounts',
