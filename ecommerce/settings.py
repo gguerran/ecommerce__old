@@ -29,6 +29,7 @@ INSTALLED_APPS = [
 
     # Apps locais
     'ecommerce.accounts',
+    'ecommerce.product',
 ]
 
 REST_FRAMEWORK = {
