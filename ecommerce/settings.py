@@ -20,6 +20,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    # Apps locais
+    'ecommerce.accounts',
 ]
 
 MIDDLEWARE = [
@@ -59,6 +62,8 @@ DATABASES = {
         'NAME': BASE_DIR / config("SQL_NAME_DATABASE"),
     }
 }
+
+AUTH_USER_MODEL = 'accounts.User'
 
 AUTH_PASSWORD_VALIDATORS = [
     {
