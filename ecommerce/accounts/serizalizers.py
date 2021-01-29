@@ -1,3 +1,6 @@
+import django.contrib.auth.password_validation as validators
+from django.core import exceptions
+
 from rest_framework import serializers
 
 from ecommerce.accounts.models import User
@@ -17,17 +20,33 @@ class UserSerializer(serializers.ModelSerializer):
         ]
         extra_kwargs = {'id': {'read_only': True}}
 
+    def validate(self, data):
+        password = data.get('password1')
+        password2 = data.get('password2')
+
+        if password == password2:
+            user = User(username=data.get('username'))
+            errors = dict()
+            try:
+                validators.validate_password(password=password, user=user)
+            except exceptions.ValidationError as e:
+                errors['password1'] = list(e.messages)
+                if errors:
+                    raise serializers.ValidationError(errors)
+        else:
+            error_didnt_match = {'password1': PASS_DIDNT_MATCH}
+            raise serializers.ValidationError(error_didnt_match)
+
+        return super(UserSerializer, self).validate(data)
+
     def create(self, validated_data):
         password = validated_data.pop('password1')
-        password2 = validated_data.pop('password2')
-        if password == password2:
-            user = User(**validated_data)
-            user.is_active = True
-            user.is_superuser = False
-            user.set_password(password)
-            user.save()
-            return user
-        raise serializers.ValidationError(PASS_DIDNT_MATCH)
+        user = User(username=validated_data.pop('username'))
+        user.is_active = True
+        user.is_superuser = False
+        user.set_password(password)
+        user.save()
+        return user
 
 
 class UpdateUserSerializer(serializers.ModelSerializer):

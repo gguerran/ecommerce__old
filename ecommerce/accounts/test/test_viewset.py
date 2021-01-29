@@ -37,7 +37,7 @@ class UserViewsTest(TestCase):
         request = factory.post('api/v1/accounts/', data)
         view = UserViewSet.as_view({'post': 'create'})
         response = view(request)
-        self.assertEqual(str(response.data[0]), PASS_DIDNT_MATCH)
+        self.assertEqual(dict(response.data)['password1'][0], PASS_DIDNT_MATCH)
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
     def test_get_all(self):
