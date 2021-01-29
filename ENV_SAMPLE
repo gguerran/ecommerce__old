@@ -1,0 +1,5 @@
+SECRET_KEY=THIS_SECRET_KEY_NOT_GOOD
+DEBUG=True
+ALLOWED_HOSTS=127.0.0.1, .localhost, .herokuapp.com
+SQL_ENGINE=django.db.backends.sqlite3
+SQL_NAME_DATABASE=db.sqlite3
