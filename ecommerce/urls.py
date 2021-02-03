@@ -38,6 +38,7 @@ urlpatterns = [
         name='schema-redoc'
     ),
     path('api/accounts/', include('ecommerce.accounts.urls'), name='accounts'),
+    path('api/', include('ecommerce.product.urls'), name='product'),
     path(
         'api/auth/',
         include('oauth2_provider.urls', namespace='oauth2_provider')
