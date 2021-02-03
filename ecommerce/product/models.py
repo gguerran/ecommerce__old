@@ -54,7 +54,7 @@ class Product(models.Model):
     name = models.CharField('nome', max_length=60)
     slug = models.SlugField('slug', unique=True, db_index=True)
     description = models.TextField('descrição', null=True, blank=True)
-    value = models.DecimalField('valor', max_digits=22, decimal_places=16)
+    value = models.DecimalField('valor', max_digits=22, decimal_places=2)
     stock = models.PositiveIntegerField('quantidade em estoque', default=0)
     image = models.ImageField(
         verbose_name='imagem', upload_to=product_image_directory_path,
