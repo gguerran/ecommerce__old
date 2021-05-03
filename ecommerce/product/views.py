@@ -20,7 +20,9 @@ class CategoryViewSet(ModelViewSet):
     filterset_fields = (
         'name', 'parent', 'parent__slug', 'parent__name', 'slug'
     )
-    search_fields = ['name', 'parent__slug', 'parent__name', 'slug']
+    search_fields = [
+        'name', 'parent__slug', 'parent__name', 'slug'
+        ]
     filter_backends = [SearchFilter, DjangoFilterBackend]
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
@@ -37,7 +39,8 @@ class ProductViewSet(ModelViewSet):
     search_fields = [
         'category__name', 'category__slug', 'category__parent__slug',
         'category__parent__name', 'name', 'slug', 'description', 'value',
-        'stock'
+        'stock', 'category__parent__parent__slug',
+        'category__parent__parent__parent__slug',
     ]
     filter_backends = [SearchFilter, DjangoFilterBackend]
     queryset = Product.objects.all()
